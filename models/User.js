@@ -6,6 +6,7 @@ const UserSchema = new Schema(
             type: String,
             unique: true,
             required: true,
+            //required: 'Please enter a username',
             trimmed: true
         },
 
@@ -13,10 +14,11 @@ const UserSchema = new Schema(
             type: String,
             required: true,
             unique: true,
-            validate: {
+            match: [/.+@.+\..+/]
+            /*validate: {
                 validator: () => Promise.resolve(false),
                 message: 'Please Enter a Valid e-mail address'
-            }
+            }*/
         },
 
         thoughts: [
