@@ -12,11 +12,15 @@ const {
 router 
     .route('/')
     .get(getAllUsers)
-    .get(getUserById)
     .post(createUser)
+    
+
+router
+    .route('/:id')
+    .get(getUserById)
     .put(updateUserById)
     .delete(deleteUser)
-
+    
 router
     .route('/:userId/friends/friendId')
     .post

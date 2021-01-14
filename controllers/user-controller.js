@@ -4,13 +4,18 @@ const UserController = {
     //GET ALL USERS
     getAllUsers(req, res){
         User.find({})
+
+        .then(dbUserData => {res.json(dbUserData)})
+        .catch(err => {res.json(err)});
     },
 
     //GET SINGLE USER BY ID
     getUserById({params}, res){
+        console.log("hello");
         User.findOne({_id: params.id})
-        //populate the data
-            .populate({})
+        //populate after data is created
+            .then(dbUserData => {res.json(dbUserData)})
+            .catch(err => {res.json(err)})
     },
 
 
