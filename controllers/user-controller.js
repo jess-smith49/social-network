@@ -9,6 +9,8 @@ const UserController = {
     //GET SINGLE USER BY ID
     getUserById({params}, res){
         User.findOne({_id: params.id})
+        //populate the data
+            .populate({})
     },
 
 
