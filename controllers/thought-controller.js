@@ -58,10 +58,6 @@ const thoughtController = {
     },
 
 
-
-
-
-
     //PUT - UPDATE THOUGHT BY ID
     updateThoughtById({params, body}, res){
         Thought.findOneAndUpdate({_id: params.id}, body, {new: true})

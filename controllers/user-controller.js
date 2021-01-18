@@ -3,8 +3,8 @@ const {User} = require('../models');
 const UserController = {
     //GET ALL USERS
     getAllUsers(req, res){
-        User.find({})
-
+        User.find()
+        .select('-__v')
         .then(dbUserData => {res.json(dbUserData)})
         .catch(err => {res.json(err)});
     },
@@ -26,6 +26,24 @@ const UserController = {
             .catch(err => res.json(err));
     },
 
+    //POST A NEW FRIEND
+   addFriend(req,res){
+       User.findOneAndUpdate(
+           {
+               _id: req.params.userId,
+               $push: {friends: req.params.friends},
+               new: true
+           }
+       )
+       .then((dbUserData) => {
+           if (!dbUserData) {
+               return res.status(404).json({message: "No user found"})
+           }
+           res.json(dbUserData)
+       })
+       .catch(err => res.json(err));
+   },
+
     //PUT - UPDATE A NEW USER **might need run validators
     updateUserById({params, body}, res){
         User.findOneAndUpdate({_id: params.id}, body, {new: true})
@@ -43,7 +61,15 @@ const UserController = {
         User.findOneAndDelete({_id: params.id})
         .then(dbUserData => res.json(dbUserData))
         .catch(err => res.json(err));
+    },
+
+     //DELETE A REACTION
+     deleteFriend({params}, res ){
+        User.findOneAndUpdate({_id: params.reactionId})
+            .then(dbThoughtData => res.json(dbThoughtData))
+            .catch(err => res.json(err));
     }
 };
+
 
 module.exports = UserController;
