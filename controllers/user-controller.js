@@ -63,9 +63,14 @@ const UserController = {
         .catch(err => res.json(err));
     },
 
-     //DELETE A REACTION
+     //DELETE A FRIEND
      deleteFriend({params}, res ){
-        User.findOneAndUpdate({_id: params.reactionId})
+        User.findOneAndUpdate
+        (
+            {_id: params.reactionId
+
+            }
+        )
             .then(dbThoughtData => res.json(dbThoughtData))
             .catch(err => res.json(err));
     }
