@@ -2,8 +2,9 @@
 
 ## Description
 The application is the backend for a social network API. It allows a user to enter a username and email, add thoughts, friends, and reactions.
+
 ## Technologies
-The technologies used in this social-network API are mongodb/monggoose, express.js, node.js and javascript. 
+The technologies used in this social-network API are MongoDB/Mongoose, Express.js, Node.js and JavaScript. This was created using VSCode and testing the routes in Insomnia core.
 
 ## Future Development
 
