@@ -29,17 +29,17 @@ const UserController = {
     //POST A NEW FRIEND
    addFriend(req,res){
        User.findOneAndUpdate(
-           {
-               _id: req.params.userId,
-               $push: {friends: req.body.friends},
-               new: true
-           }
+           
+               {_id: req.params.userId},
+               {$addToSet: {friends: req.body.type}},
+               {new: true}
+           
        )
        .then((dbUserData) => {
            if (!dbUserData) {
                return res.status(404).json({message: "No user found"})
            }
-           res.json(dbUserData)
+           return res.json(dbUserData)
        })
        .catch(err => res.json(err));
    },
@@ -64,10 +64,13 @@ const UserController = {
     },
 
      //DELETE A FRIEND
-     deleteFriend({params}, res ){
+     deleteFriend(req, res ){
         User.findOneAndUpdate
         (
-            {_id: params.reactionId
+            {
+                _id: req.params.userId,
+                $pull: {friends: req.params.friendsId},
+                new: true
 
             }
         )
