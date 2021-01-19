@@ -64,18 +64,21 @@ const UserController = {
     },
 
      //DELETE A FRIEND
-     deleteFriend(req, res ){
+     deleteFriend(req, res){
         User.findOneAndUpdate
         (
-            {
-                _id: req.params.userId,
-                $pull: {friends: req.params.friendsId},
-                new: true
-
-            }
+            
+                {_id: req.params.userId},
+                {$pull: {friends: req.body.type}},
+                {new: true}
         )
-            .then(dbThoughtData => res.json(dbThoughtData))
-            .catch(err => res.json(err));
+        .then((dbUserData) => {
+            if (!dbUserData) {
+                return res.status(404).json({message: "No user found"})
+            }
+            return res.json(dbUserData)
+        })
+        .catch(err => res.json(err));
     }
 };
 
