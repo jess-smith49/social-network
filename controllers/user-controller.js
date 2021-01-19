@@ -31,7 +31,7 @@ const UserController = {
        User.findOneAndUpdate(
            {
                _id: req.params.userId,
-               $push: {friends: req.params.friends},
+               $push: {friends: req.body.friends},
                new: true
            }
        )
